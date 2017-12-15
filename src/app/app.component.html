@@ -1,0 +1,12 @@
+<div >
+  <div style="width:100%; background-color:aqua" >
+    <h1 style="display:table; margin:0 auto">
+      <p>{{title}}</p>
+    </h1>
+    <h3 id="sample-error" *ngIf="errorFound" style="display:table; margin:0 auto; color:red">
+        <p>Validation Errors Found</p>
+    </h3>
+  </div>
+  <br>
+  <address (validationError)="displayMessage($event)"></address>
+</div>

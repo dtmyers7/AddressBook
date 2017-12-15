@@ -1,0 +1,68 @@
+<form [formGroup]="addressForm" novalidate >
+    <div style="width:100%;font-size:large" (resetInitiated)="refreshAddressData()">
+        <div  [ngClass]="{'center': true, 'hide-element': currentMode=='insert' }" >
+            <span class="labelx" >Addresses </span>
+            <select formControlName="addressList" [(ngModel)] = "currentAddress" >
+                <option *ngFor="let enteredAddress of theAddresses" [selected]="enteredAddress.name == currentAddress">{{enteredAddress.name}}</option>
+            </select>&nbsp;&nbsp;&nbsp;
+            <a href="#" (click)="newAddress()" title="Add New Address" >
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </div><br>
+        <div class='center'>
+            <table>
+                <tr>
+                    <td class="labelx"><span>Name</span></td>
+                    <td>
+                    <input [(ngModel)] = "theName" type="text" name="fullName" formControlName="name"  placeholder="Enter Address Name" >
+                    <div *ngIf="addressForm.get('name').errors" >
+                        <div  class="err-msg"  *ngFor="let errMsg of getErrors('name')" >{{errMsg}}</div>
+                    </div>
+            </td>
+                </tr>
+                <tr>
+                    <td class="labelx" style="vertical-align: top;"><span>Address</span></td>
+                    <td>
+                        <input [(ngModel)] = "theAddressLine1" type="text" name="addressLine1" formControlName="addressLine1" placeholder="Enter Address Line1"> 
+                        <div *ngIf="addressForm.get('addressLine1').errors" >
+                            <div  class="err-msg"  *ngFor="let errMsg of getErrors('addressLine1')" >{{errMsg}}</div>
+                        </div>
+                        <br><input [(ngModel)] = "theAddressLine2" type="text" name="addressLine2" formControlName="addressLine2" > 
+                    </td>
+                </tr>
+                <tr>
+                    <td class="labelx"><span>City/State/Zip</span></td>
+                    <td>
+                        <input [(ngModel)] = "theCity" type="text" name="city" placeholder="Enter City" formControlName="city" style="width: 90px;" > 
+                        <input [(ngModel)] = "theState" type="text" name="state"placeholder="State" formControlName="state" style="width: 55px;"> 
+                        <input [(ngModel)] = "theZip" type="text" name="zip" placeholder="Zip"  formControlName="zip" id="zipcode" style="width: 68px;"> 
+                        <div *ngIf="addressForm.get('city').errors" >
+                            <div  class="err-msg"  *ngFor="let errMsg of getErrors('city')" >{{errMsg}}</div>
+                        </div>
+                        <div *ngIf="addressForm.get('state').errors" >
+                            <div  class="err-msg"  *ngFor="let errMsg of getErrors('state')" >{{errMsg}}</div>
+                        </div>
+                        <div *ngIf="addressForm.get('zip').errors" >
+                            <div  class="err-msg"  *ngFor="let errMsg of getErrors('zip')" >{{errMsg}}</div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center">
+                        <br>
+                        <div *ngIf="currentMode == 'insert'" >
+                            <button type="button" (click)="saveAddress(true)" >Insert</button>
+                            <span style="width:35px"></span>
+                            <button type="button" (click)="cancel()" >Cancel</button>
+                        </div>    
+                        <button *ngIf="currentMode == 'update'" type="button" (click)="saveAddress(false)" >Update</button>
+                        <div style="color:red; font-size:larger">
+                            <span *ngIf="completionStatus == 'updated'">Address Updated</span>
+                            <span *ngIf="completionStatus == 'inserted'">Address Inserted</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</form>

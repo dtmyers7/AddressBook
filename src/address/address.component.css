@@ -1,0 +1,13 @@
+.center{
+    display:table; 
+    margin:0 auto;
+}
+.hide-element{
+    display: none;
+}
+.labelx{
+    font-weight: bolder;
+}
+.err-msg{
+    color: red;
+}
